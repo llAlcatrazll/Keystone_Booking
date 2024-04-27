@@ -1,26 +1,20 @@
-import { useState } from "react";
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./index.css";
-
-function App() {
-  const [count, setCount] = useState(0);
-
+import { QueryClient, QueryClientProvider } from "react-query";
+import Login from "./Pages/Login";
+import Signup from "./Pages/Signup";
+const queryClient = new QueryClient();
+const App = () => {
   return (
-    <>
-      <h1 className="text-red-700">Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/Signup" element={<Signup />}></Route>
+        </Routes>
+      </Router>
+    </QueryClientProvider>
   );
-}
+};
 
 export default App;
